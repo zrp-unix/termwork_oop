@@ -1,8 +1,10 @@
+import java.util.Arrays;
+
 class  Point {
     private int dim;
-    private double[] x; //= new double[3];
+    private double[] x;
 
-    public Point(int dim) {
+    Point(int dim) {
         this.x = new double[dim];
         this.dim = dim;
         for(int i = 0; i < dim; i++) {
@@ -10,29 +12,29 @@ class  Point {
         }
     }
 
-    public Point(int dim, double[] x) {
+    Point(int dim, double[] x) {
         this.x = new double[dim];
         this.dim = dim;
         if (dim >= 0) System.arraycopy(x, 0, this.x, 0, dim);
     }
 
-    public double[] getX() {
+    double[] getX() {
         return x;
     }
 
-    public double getX(int i) {
+    double getX(int i) {
         return x[i];
     }
 
-    public void setX(double[] x) {
+    void setX(double[] x) {
         this.x = x;
     }
 
-    public void setX(double[] x, int i) {
+    void setX(double[] x, int i) {
         this.x[i] = x[i];
     }
 
-    public double abs() {
+    double abs() {
         double res = 0;
         for (double i : x) {
             res += i * i;
@@ -49,7 +51,7 @@ class  Point {
         return new Point(x.length, x);
     }
 
-    public Point add(Point b) {
+    Point add(Point b) {
         int mindim = Math.min(dim, b.dim);
         double[] y = new double[mindim];
         for (int i = 0; i < mindim; i++) {
@@ -128,9 +130,7 @@ class  Point {
         return new Point(y.length, y);
     }
 
-//    String toString(){
-//
-//    }
+    public String toString(){
+        return "Coordinates: " + Arrays.toString(x) + "\nDimensions: " + dim;
+    }
 }
-
-

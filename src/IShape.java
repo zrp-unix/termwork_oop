@@ -1,4 +1,4 @@
-public interface IShape {
+interface IShape {
     double square();
     double length();
     IShape shift(Point2D a);

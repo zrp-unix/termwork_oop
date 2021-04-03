@@ -1,9 +1,9 @@
 class Point2D extends Point {
-    public Point2D() {
+    Point2D() {
         super(2);
     }
 
-    public Point2D(double[] x) {
+    Point2D(double[] x) {
         super(2, x);
     }
 
