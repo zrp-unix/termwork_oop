@@ -1,4 +1,4 @@
-public class NGon implements IShape {
+class NGon implements IShape {
     private int n;
     private Point2D[] p;
 

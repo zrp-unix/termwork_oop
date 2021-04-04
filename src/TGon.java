@@ -1,4 +1,4 @@
-public class TGon extends NGon{
+class TGon extends NGon{
     TGon(Point2D[] p) {
         super(p);
     }

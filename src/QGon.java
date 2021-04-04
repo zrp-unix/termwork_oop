@@ -1,4 +1,4 @@
-public class QGon extends NGon{
+class QGon extends NGon{
     QGon(Point2D[] p) {
         super(p);
     }

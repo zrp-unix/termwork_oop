@@ -1,4 +1,4 @@
-public class Polyline {
+class Polyline {
     private int n;
     private Point2D[] p;
 

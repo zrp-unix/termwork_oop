@@ -1,4 +1,4 @@
-public class Trapeze extends QGon{
+class Trapeze extends QGon{
     Trapeze(Point2D[] p) {
         super(p);
     }

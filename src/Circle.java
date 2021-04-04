@@ -1,4 +1,4 @@
-public class Circle implements IShape{
+class Circle implements IShape{
     private Point2D p;
     private double r;
 

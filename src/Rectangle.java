@@ -1,4 +1,4 @@
-public class Rectangle extends QGon{
+class Rectangle extends QGon{
     Rectangle(Point2D[] p) {
         super(p);
     }
