@@ -15,7 +15,7 @@ class  Point {
     Point(int dim, double[] x) {
         this.x = new double[dim];
         this.dim = dim;
-        if (dim >= 0) System.arraycopy(x, 0, this.x, 0, dim);
+        if (dim > 0) System.arraycopy(x, 0, this.x, 0, dim);
     }
 
     double[] getX() {
@@ -117,6 +117,8 @@ class  Point {
         for (int k = 0; k < a.x.length; k++) {
             if(k != i)
                 y[k] = a.x[k] * -1;
+            else
+                y[k] = a.x[k];
         }
         return new Point(y.length, y);
     }
@@ -126,6 +128,8 @@ class  Point {
         for (int k = 0; k < x.length; k++) {
             if(k != i)
                 y[k] = x[k] * -1;
+            else
+                y[k] = x[k];
         }
         return new Point(y.length, y);
     }
