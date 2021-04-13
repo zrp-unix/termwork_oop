@@ -4,7 +4,12 @@ class  Point {
     private int dim;
     private double[] x;
 
-    Point(int dim) {
+    Point(int dim){
+        if(dim < 0) try {
+            throw new Exception("Dim < 0");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         this.x = new double[dim];
         this.dim = dim;
         for(int i = 0; i < dim; i++) {

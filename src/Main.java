@@ -1,11 +1,14 @@
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         double[] z = {1, 2};
-        Point p = new Point(5,new double[]{1, 6, 5,4,3});
-        System.out.println(p.abs());
-        System.out.println(p.toString());
-        System.out.println(Arrays.toString(p.getX()));
+        Point b = new Point(2);
+        Point2D p1 = new Point2D(new double[]{0, 0});
+        Point2D p2 = new Point2D(new double[]{2, 2});
+        Segment s1 = new Segment(p1, p2);
+        s1.length();
+        System.out.println(s1.symAxis(1));
+        ;
     }
 }
