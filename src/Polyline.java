@@ -6,18 +6,20 @@ class Polyline {
         return;
     }
     Point2D[] getP() {
-        return null;
+        return p;
     }
 
     Point2D getP(int i) {
-        return null;
+        return p[i];
     }
 
     void setP(Point2D[] p) {
-
+        n = p.length;
+        this.p = p;
     }
 
-    void setP(Point2D p, int i) {
+    void setP(Point2D p, int i) throws Exception {
+        if(i >= n || i < 0) throw new Exception("wrong point number");
 
     }
 
