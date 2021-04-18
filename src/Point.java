@@ -1,25 +1,20 @@
 import java.util.Arrays;
 
-class  Point {
+class Point {
     private int dim;
     private double[] x;
 
     Point(int dim) throws Exception {
-        try {
-            if(dim <= 0) throw new Exception("Dim < 0");
-            this.x = new double[dim];
-            this.dim = dim;
-            for(int i = 0; i < dim; i++) {
-                this.x[i] = 0;
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            System.exit(1);
+        if (dim <= 0) throw new Exception("Dim < 0");
+        this.x = new double[dim];
+        this.dim = dim;
+        for (int i = 0; i < dim; i++) {
+            this.x[i] = 0;
         }
     }
 
     Point(int dim, double[] x) throws Exception {
-        if(dim <= 0) throw new Exception("Dim < 0");
+        if (dim <= 0) throw new Exception("Dim < 0");
         this.x = new double[dim];
         this.dim = dim;
         System.arraycopy(x, 0, this.x, 0, dim);
@@ -49,85 +44,56 @@ class  Point {
         return Math.sqrt(res);
     }
 
-    static Point add(Point a, Point b) {
-        try {
-            int dim = Math.min(a.dim, b.dim);
-            double[] x = new double[dim];
-            for (int i = 0; i < dim; i++) {
-                x[i] = a.x[i] + b.x[i];
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+    static Point add(Point a, Point b) throws Exception{
+        int dim = Math.min(a.dim, b.dim);
+        double[] x = new double[dim];
+        for (int i = 0; i < dim; i++) {
+            x[i] = a.x[i] + b.x[i];
         }
-        return null;
+        return new Point(x.length, x);
     }
 
-    Point add(Point b) {
-        try {
-            int mindim = Math.min(dim, b.dim);
-            double[] y = new double[mindim];
-            for (int i = 0; i < mindim; i++) {
-                y[i] = x[i] + b.x[i];
-            }
-            return new Point(y.length, y);
-        } catch (Exception e) {
-            e.printStackTrace();
+    Point add(Point b) throws Exception{
+        int mind = Math.min(dim, b.dim);
+        double[] y = new double[mind];
+        for (int i = 0; i < mind; i++) {
+            y[i] = x[i] + b.x[i];
         }
-        return null;
+        return new Point(y.length, y);
     }
 
-    static Point sub(Point a, Point b) {
-        try {
-            int dim = Math.min(a.dim, b.dim);
-            double[] x = new double[dim];
-            for (int i = 0; i < dim; i++) {
-                x[i] = a.x[i] - b.x[i];
-            }
-            return new Point(x.length, x);
-        } catch (Exception e) {
-            e.printStackTrace();
+    static Point sub(Point a, Point b) throws Exception{
+        int dim = Math.min(a.dim, b.dim);
+        double[] x = new double[dim];
+        for (int i = 0; i < dim; i++) {
+            x[i] = a.x[i] - b.x[i];
         }
-        return null;
+        return new Point(x.length, x);
     }
 
-    Point sub(Point b) {
-        try {
-            int mindim = Math.min(dim, b.dim);
-            double[] y = new double[mindim];
-            for (int i = 0; i < mindim; i++) {
-                y[i] = x[i] - b.x[i];
-            }
-            return new Point(y.length, y);
-        } catch (Exception e) {
-            e.printStackTrace();
+    Point sub(Point b) throws Exception{
+        int mind = Math.min(dim, b.dim);
+        double[] y = new double[mind];
+        for (int i = 0; i < mind; i++) {
+            y[i] = x[i] - b.x[i];
         }
-        return null;
+        return new Point(y.length, y);
     }
 
-    static Point mult(Point a, double r) {
-        try {
-            double[] x = new double[a.dim];
-            for (int i = 0; i < a.dim; i++) {
-                x[i] = a.x[i] * r;
-            }
-            return new Point(x.length, x);
-        } catch (Exception e) {
-            e.printStackTrace();
+    static Point mult(Point a, double r) throws Exception{
+        double[] x = new double[a.dim];
+        for (int i = 0; i < a.dim; i++) {
+            x[i] = a.x[i] * r;
         }
-        return a;
+        return new Point(x.length, x);
     }
 
-    Point mult(double r) {
-        try {
-            double[] y = new double[dim];
-            for (int i = 0; i < dim; i++) {
-                y[i] = x[i] * r;
-            }
-            return new Point(y.length, y);
-        } catch (Exception e) {
-            e.printStackTrace();
+    Point mult(double r) throws Exception{
+        double[] y = new double[dim];
+        for (int i = 0; i < dim; i++) {
+            y[i] = x[i] * r;
         }
-        return null;
+        return new Point(y.length, y);
     }
 
     static double mult(Point a, Point b) {
@@ -140,47 +106,37 @@ class  Point {
     }
 
     double mult(Point b) {
-        int mindim = Math.min(dim, b.dim);
+        int mind = Math.min(dim, b.dim);
         int res = 0;
-        for (int i = 0; i < mindim; i++) {
+        for (int i = 0; i < mind; i++) {
             res += x[i] * b.x[i];
         }
         return res;
     }
 
-    static Point symAxis(Point a, int i) {
-        try {
-            double[] y = new double[a.dim];
-            for (int k = 0; k < a.x.length; k++) {
-                if (k != i && a.x[k] != 0)
-                    y[k] = a.x[k] * -1;
-                else
-                    y[k] = a.x[k];
-            }
-            return new Point(y.length, y);
-        } catch (Exception e) {
-            e.printStackTrace();
+    static Point symAxis(Point a, int i) throws Exception {
+        double[] y = new double[a.dim];
+        for (int k = 0; k < a.x.length; k++) {
+            if (k != i && a.x[k] != 0)
+                y[k] = a.x[k] * - 1;
+            else
+                y[k] = a.x[k];
         }
-        return null;
+        return new Point(y.length, y);
     }
 
-    Point symAxis(int i) {
-        try {
-            double[] y = new double[dim];
-            for (int k = 0; k < x.length; k++) {
-                if (k != i && x[k] != 0)
-                    y[k] = x[k] * -1;
-                else
-                    y[k] = x[k];
-            }
-            return new Point(y.length, y);
-        } catch (Exception e) {
-            e.printStackTrace();
+    Point symAxis(int i) throws Exception{
+        double[] y = new double[dim];
+        for (int k = 0; k < x.length; k++) {
+            if (k != i && x[k] != 0)
+                y[k] = x[k] * - 1;
+            else
+                y[k] = x[k];
         }
-        return null;
+        return new Point(y.length, y);
     }
 
-    public String toString(){
+    public String toString() {
         return "Coordinates: " + Arrays.toString(x) + "\nDimensions: " + dim;
     }
 }

@@ -2,14 +2,17 @@ class Polyline {
     private int n;
     private Point2D[] p;
 
-    Polyline(Point2D[] p) {
-        return;
+    Polyline(Point2D[] p) throws Exception{
+        if(p.length <= 0) throw new Exception("а");
+        this.p = p;
+        n = p.length;
     }
     Point2D[] getP() {
         return p;
     }
 
-    Point2D getP(int i) {
+    Point2D getP(int i) throws Exception{
+        if(i >= n || i < 0) throw new Exception("wrong point number");
         return p[i];
     }
 
@@ -20,11 +23,11 @@ class Polyline {
 
     void setP(Point2D p, int i) throws Exception {
         if(i >= n || i < 0) throw new Exception("wrong point number");
-
+        this.p[i] = p;
     }
 
     public double length() {
-        return 0;
+        ;
     }
 
     public Segment shift(Point2D a) {
