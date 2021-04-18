@@ -1,9 +1,10 @@
-class Polyline {
+import java.util.Arrays;
+
+class Polyline extends OpenFigure {
     private int n;
     private Point2D[] p;
 
-    Polyline(Point2D[] p) throws Exception{
-        if(p.length <= 0) throw new Exception("а");
+    Polyline(Point2D[] p) {
         this.p = p;
         n = p.length;
     }
@@ -26,20 +27,36 @@ class Polyline {
         this.p[i] = p;
     }
 
-    public double length() {
-        ;
+    public double length() throws Exception {
+        double len = 0;
+        for(int i = 0; i < n-1; i++){
+            len += Point.sub(p[i], p[i+1]).abs();
+        }
+        return len;
     }
 
-    public Segment shift(Point2D a) {
-        return null;
+    public Polyline shift(Point2D a) throws Exception {
+        Point2D[] b = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+            b[k] = new Point2D(Point.add(p[k], a).getX());
+        }
+        return new Polyline(b);
     }
 
-    public IShape rot(double phi) {
-        return null;
+    public IShape rot(double phi) throws Exception {
+        Point2D[] a = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+            a[k] = p[k].rot(phi);
+        }
+        return new Polyline(a);
     }
 
-    public IShape symAxis(int i) {
-        return null;
+    public IShape symAxis(int i) throws Exception{
+        Point2D[] a = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+                a[k] = new Point2D(p[k].symAxis(i).getX());
+        }
+        return new Polyline(a);
     }
 
     public boolean cross(IShape s) {
@@ -47,6 +64,6 @@ class Polyline {
     }
 
     public String toString() {
-        return null;
+        return Arrays.toString(p);
     }
 }

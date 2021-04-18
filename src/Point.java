@@ -137,6 +137,6 @@ class Point {
     }
 
     public String toString() {
-        return "Coordinates: " + Arrays.toString(x) + "\nDimensions: " + dim;
+        return "Coordinates: " + Arrays.toString(x) + " Dimensions: " + dim;
     }
 }

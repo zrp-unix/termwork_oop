@@ -1,8 +1,8 @@
 interface IShape {
     double square();
-    double length();
-    IShape shift(Point2D a);
-    IShape rot(double phi);
-    IShape symAxis(int i);
+    double length() throws Exception;
+    IShape shift(Point2D a) throws Exception;
+    IShape rot(double phi) throws Exception;
+    IShape symAxis(int i) throws Exception;
     boolean cross(IShape s);
 }
