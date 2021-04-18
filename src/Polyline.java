@@ -3,8 +3,8 @@ import java.util.Arrays;
 class Polyline extends OpenFigure {
     private int n;
     private Point2D[] p;
-
-    Polyline(Point2D[] p) {
+    Polyline(Point2D[] p) throws Exception {
+        if(p.length <= 0) throw new Exception("p empty");
         this.p = p;
         n = p.length;
     }
@@ -43,7 +43,7 @@ class Polyline extends OpenFigure {
         return new Polyline(b);
     }
 
-    public IShape rot(double phi) throws Exception {
+    public Polyline rot(double phi) throws Exception {
         Point2D[] a = new Point2D[p.length];
         for(int k = 0; k < n; k++) {
             a[k] = p[k].rot(phi);
@@ -51,7 +51,7 @@ class Polyline extends OpenFigure {
         return new Polyline(a);
     }
 
-    public IShape symAxis(int i) throws Exception{
+    public Polyline symAxis(int i) throws Exception{
         Point2D[] a = new Point2D[p.length];
         for(int k = 0; k < n; k++) {
                 a[k] = new Point2D(p[k].symAxis(i).getX());

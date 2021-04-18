@@ -16,7 +16,7 @@ class Prism implements IFigure{
     }
 
     Point3D[] getP() {
-        return null;
+        return ;
     }
 
     void setP(Point3D[] p){
@@ -36,7 +36,11 @@ class Prism implements IFigure{
     }
 
     public double volume() {
-        return 0;
+        double result = 0;
+        for (int i = 0; i < n; i++) {
+            result +=
+        }
+        return 1/6 * getP(0).mix_prod(getP(1), getP(2));
     }
 
     public String toString() {

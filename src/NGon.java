@@ -1,49 +1,84 @@
+import java.util.Arrays;
+
 class NGon implements IShape {
     private int n;
     private Point2D[] p;
 
-    NGon(Point2D[] p) {
+    NGon(Point2D[] p) throws Exception {
+        if(p.length<=0) throw new Exception("empty array");
+        this.p = p;
+        n = p.length;
+    }
 
+    NGon() {
     }
 
     int getN() {
-        return 0;
+        return n;
     }
 
     Point2D[] getP() {
-        return null;
+        return p;
     }
 
-    Point2D getP(int i) {
-        return null;
+    Point2D getP(int i) throws Exception {
+        if(i > p.length) throw new Exception("point does not exist");
+        return p[i];
     }
 
-    void setP(Point2D[] p) {
-
+    void setP(Point2D[] p) throws Exception {
+        if(p.length<=0) throw new Exception("empty array");
+        this.p = p;
+        n = p.length;
     }
 
-    void set(Point2D p, int i) {
-
+    void setP(Point2D p, int i) throws Exception {
+        if(i > this.p.length) throw new Exception("point does not exist");
+        this.p[i] = p;
     }
 
-    public double square() {
-        return 0;
+    public double square() throws Exception {
+        double result = p[p.length-1].getX(0) * p[0].getX(1);
+        for (int i = 0; i < p.length-1; i++) {
+            result += p[i].getX(0) * p[i+1].getX(1);
+        }
+        result -= p[p.length-1].getX(1) * p[0].getX(0);
+        for (int i = 0; i < p.length-1; i++) {
+            result -= p[i].getX(1) * p[i+1].getX(0);
+        }
+        return 0.5*Math.abs(result);
     }
 
-    public double length() {
-        return 0;
+    public double length() throws Exception {
+        double len = 0;
+        for(int i = 0; i < n-1; i++){
+            len += Point.sub(p[i], p[i+1]).abs();
+        }
+        return len;
     }
 
-    public Segment shift(Point2D a) {
-        return null;
+    public NGon shift(Point2D a) throws Exception {
+        Point2D[] b = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+            b[k] = new Point2D(Point.add(p[k], a).getX());
+        }
+        return new NGon(b);
     }
 
-    public IShape rot(double phi) {
-        return null;
+    public NGon rot(double phi) throws Exception {
+        Point2D[] a = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+            a[k] = p[k].rot(phi);
+        }
+        return new NGon(a);
     }
 
-    public IShape symAxis(int i) {
-        return null;
+    public NGon symAxis(int i) throws Exception {
+        Point2D[] a = new Point2D[p.length];
+        for(int k = 0; k < n; k++) {
+            a[k] = new Point2D(p[k].symAxis(i).getX());
+        }
+        return new NGon(a);
     }
 
     public boolean cross(IShape s) {
@@ -51,6 +86,6 @@ class NGon implements IShape {
     }
 
     public String toString() {
-        return null;
+        return Arrays.toString(p);
     }
 }

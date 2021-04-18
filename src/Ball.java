@@ -2,8 +2,10 @@ class Ball implements IFigure{
     private Point3D p;
     private double r;
 
-    Ball(Point3D p, double r) {
-
+    Ball(Point3D p, double r) throws Exception {
+        if(r < 0) throw new Exception("radius less than 0");
+        this.p = p;
+        this.r = r;
     }
 
     Point3D getP() {
@@ -11,7 +13,7 @@ class Ball implements IFigure{
     }
 
     void setP (Point3D p) {
-
+        this.p = p;
     }
 
     double getR(double r) {
@@ -23,11 +25,11 @@ class Ball implements IFigure{
     }
 
     public double square() {
-        return 0;
+        return 4 * Math.PI * (r * r);
     }
 
     public double volume() {
-        return 0;
+        return (double)4/3 * Math.PI * (r * r * r);
     }
 
     public String toString() {

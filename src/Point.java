@@ -15,9 +15,11 @@ class Point {
 
     Point(int dim, double[] x) throws Exception {
         if (dim <= 0) throw new Exception("Dim < 0");
-        this.x = new double[dim];
+        this.x = x;
         this.dim = dim;
-        System.arraycopy(x, 0, this.x, 0, dim);
+    }
+
+    Point() {
     }
 
     double[] getX() {
@@ -30,6 +32,7 @@ class Point {
 
     void setX(double[] x) {
         this.x = x;
+        dim = x.length;
     }
 
     void setX(double[] x, int i) {

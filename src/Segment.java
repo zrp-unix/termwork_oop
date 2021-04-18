@@ -35,14 +35,13 @@ class Segment extends OpenFigure {
         return new Segment(p1, p2);
     }
 
-    public IShape rot(double phi) throws Exception {
+    public Segment rot(double phi) throws Exception {
         Point2D s1 = start.rot(phi);
         Point2D f1 = finish.rot(phi);
         return new Segment(s1, f1);
     }
 
-    public IShape symAxis(int i) throws Exception {
-
+    public Segment symAxis(int i) throws Exception {
             Point2D s1 = new Point2D(start.symAxis(i).getX());;
             Point2D f1 = new Point2D(finish.symAxis(i).getX());;
             return new Segment(s1, f1);
