@@ -3,12 +3,17 @@ class Prism implements IFigure{
     private Point3D[] p1;
     private Point3D[] p2;
 
-    Prism(Point3D[] p1, Point3D[] p2) {
-
+    Prism(Point3D[] p1, Point3D[] p2) throws Exception {
+        if(p1.length < 3 || p2.length < 3)throw new Exception("prism must have 3 or more points on each side");
+        if(p1.length != p2.length)throw new Exception("sides have different number of points");
+        this.p1 = p1;
+        this.p2 = p2;
     }
 
-    Prism(Point3D[] p) {
-
+    Prism(Point3D[] p) throws Exception {
+        if(p.length % 2 != 0) throw new Exception("number of points must be even");
+        System.arraycopy(p, 0, p1, 0, p.length/2);
+        System.arraycopy(p, p.length/2+1, p2, 0, p.length/2);
     }
 
     int getN() {
@@ -16,15 +21,20 @@ class Prism implements IFigure{
     }
 
     Point3D[] getP() {
-        return ;
+        Point3D[] p = new Point3D[p1.length*2];
+        System.arraycopy(p1, 0, p, 0, p1.length);
+        System.arraycopy(p2, 0, p, p1.length+1, p2.length);
+        return p;
     }
 
-    void setP(Point3D[] p){
-
+    void setP(Point3D[] p) throws Exception {
+        if(p.length % 2 != 0) throw new Exception("number of points must be even");
+        System.arraycopy(p, 0, p1, 0, p.length/2);
+        System.arraycopy(p, p.length/2+1, p2, 0, p.length/2);
     }
 
     Point3D getP(int i) {
-        return null;
+        if (i > p1.length) throw new Exception("");
     }
 
     void setP(Point3D p, int i) {
@@ -36,11 +46,34 @@ class Prism implements IFigure{
     }
 
     public double volume() {
-        double result = 0;
-        for (int i = 0; i < n; i++) {
-            result +=
+        double vol = 0;
+        double x1, y1, z1;
+        double x2 = 0, y2 = 1, z2 = 0;
+        int cnt = 0;
+        for (int i = 0; i < p1.length; i++) {
+            if(p1[i].getX(1)== 0)
+                cnt++;
         }
-        return 1/6 * getP(0).mix_prod(getP(1), getP(2));
+        if(cnt == p1.length) {
+            x2 = 1; y2 = 0; z2 = 0;
+        }
+        x1 = ((p1[0].getX(1) - p1[1].getX(1)) * (p1[2].getX(2) - p1[1].getX(2))) - ((p1[0].getX(2) - p1[1].getX(2)) * (p1[2].getX(1) - p1[1].getX(1)));
+        y1 = ((p1[0].getX(0) - p1[1].getX(0)) * (p1[2].getX(2) - p1[1].getX(2))) - ((p1[0].getX(2) - p1[1].getX(2)) * (p1[2].getX(0) - p1[1].getX(0)));
+        z1 = ((p1[0].getX(0) - p1[1].getX(0)) * (p1[2].getX(1) - p1[1].getX(1))) - ((p1[0].getX(1) - p1[1].getX(1)) * (p1[2].getX(0) - p1[1].getX(0)));
+        double d =  (-1 * p1[1].getX(0)) * x1 + (-1 * p1[1].getX(1)) * y1 + (-1 * p1[1].getX(2)) * z1;
+        double cosa = Math.abs(x1 * x2 + y1 * y2 + z1 * z2)/(Math.sqrt(x1*x1 + y1*y1 + z1*z1) * Math.sqrt(x2*x2 + y2*y2 + z2*z2));
+        double s = p1[p1.length-1].getX(0) * p1[0].getX(2);
+        for (int i = 0; i < p1.length-1; i++) {
+            s += p1[i].getX(0) * p1[i+1].getX(2);
+        }
+        s -= p1[p1.length-1].getX(2) * p1[0].getX(0);
+        for (int i = 0; i < p1.length-1; i++) {
+            s -= p1[i].getX(2) * p1[i+1].getX(0);
+        }
+        double h = Math.abs(x1*p2[1].getX(0) + y1*p2[1].getX(1) + z1*p2[1].getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
+        s *= cosa;
+        vol = Math.abs(h*s/3);
+        return vol;
     }
 
     public String toString() {
