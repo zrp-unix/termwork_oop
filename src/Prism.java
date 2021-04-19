@@ -33,8 +33,9 @@ class Prism implements IFigure{
         System.arraycopy(p, p.length/2+1, p2, 0, p.length/2);
     }
 
-    Point3D getP(int i) {
-        if (i > p1.length) throw new Exception("");
+    Point3D getP(int i) throws Exception {
+        if (i > p1.length) throw new Exception("this point does not exist");
+        return p1[i];
     }
 
     void setP(Point3D p, int i) {
