@@ -64,6 +64,7 @@ class Prism implements IFigure{
         for (int i = 0; i < p1.length-1; i++) {
             s -= p1[i].getX(2) * p1[i+1].getX(0);
         }
+        s*= 0.5;
         double h = Math.abs(x1*p2[1].getX(0) + y1*p2[1].getX(1) + z1*p2[1].getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
         if(cnt == p1.length) {
             ;
@@ -110,6 +111,7 @@ class Prism implements IFigure{
         for (int i = 0; i < p1.length-1; i++) {
             s -= p1[i].getX(2) * p1[i+1].getX(0);
         }
+        s*= 0.5;
         double h = Math.abs(x1*p2[1].getX(0) + y1*p2[1].getX(1) + z1*p2[1].getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
         s *= cosa;
         vol = Math.abs(h*s);

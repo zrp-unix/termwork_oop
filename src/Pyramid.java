@@ -61,6 +61,7 @@ class Pyramid implements IFigure{
         for (int i = 0; i < p.length-1; i++) {
             s -= p[i].getX(2) * p[i+1].getX(0);
         }
+        s*= 0.5;
         double h = Math.abs(x1*p0.getX(0) + y1*p0.getX(1) + z1*p0.getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
         if(cnt == p.length) {
             ;
@@ -103,6 +104,7 @@ class Pyramid implements IFigure{
         for (int i = 0; i < p.length-1; i++) {
             s -= p[i].getX(2) * p[i+1].getX(0);
         }
+        s*= 0.5;
         double h = Math.abs(x1*p0.getX(0) + y1*p0.getX(1) + z1*p0.getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
         if(cnt == p.length) {
             ;

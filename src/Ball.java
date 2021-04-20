@@ -25,7 +25,7 @@ class Ball implements IFigure{
     }
 
     public double square() {
-        return 4 * Math.PI * (r * r);
+        return (4 * Math.PI * (r * r));
     }
 
     public double volume() {
