@@ -33,6 +33,6 @@ class Ball implements IFigure{
     }
 
     public String toString() {
-        return null;
+        return "Radius: " + r + "\n" + p;
     }
 }

@@ -81,8 +81,23 @@ class NGon implements IShape {
         return new NGon(a);
     }
 
-    public boolean cross(IShape s) {
-        return false;
+    public boolean cross(IShape s) throws Exception {
+        boolean hasIntersect = true;
+        if(s instanceof NGon) {
+            for(int i = 0; i < n; i++) {
+                Point2D p1 = p[i];
+                Point2D p2 = p[(i+1)%n];
+                Point2D v = (Point2D) p2.sub(p1);
+                for (int k = 0; k < ((NGon) s).n; k++) {
+                    Point2D w = (Point2D) ((NGon) s).getP(k).sub(p1);
+                    if(v.mult(w) > 0) {
+                        hasIntersect = false;
+                        break;
+                    }
+                }
+            }
+        }
+        return hasIntersect;
     }
 
     public String toString() {

@@ -45,6 +45,7 @@ class Circle implements IShape{
     }
 
     public boolean cross(IShape s) {
+        double len = length();
         return false;
     }
 

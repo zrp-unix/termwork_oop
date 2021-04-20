@@ -98,7 +98,7 @@ class Point {
         }
         return new Point(y.length, y);
     }
-
+    //dot_prod
     static double mult(Point a, Point b) {
         int dim = Math.min(a.dim, b.dim);
         int res = 0;

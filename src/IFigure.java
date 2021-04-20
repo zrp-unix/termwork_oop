@@ -1,4 +1,4 @@
 interface IFigure {
-    double square();
-    double volume();
+    double square() throws Exception;
+    double volume() throws Exception;
 }
