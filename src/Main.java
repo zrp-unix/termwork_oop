@@ -181,14 +181,14 @@ public class Main {
             }
                 for (int k = 0; k < shape_num; k++) {
                     if (sh.get(0).cross(is.get(k))) {
-                        System.out.println("Intersect with " + is.get(k));
+                        System.out.println("Intersect");
                     } else {
-                        System.out.println("Don't intersect with " + is.get(k));
+                        System.out.println("Don't intersect");
                     }
                 }
                 System.out.print("Enter the type of movement of the shape: ");
                 String move;
-                move = in.nextLine();
+                move = in.next();
                 List<IShape> shp = new LinkedList<IShape>();
                 switch (move) {
                     case "Shift":
@@ -205,10 +205,10 @@ public class Main {
                         break;
                 }
                 for (int k = 0; k < shape_num; k++) {
-                    if (sh.get(0).cross(is.get(k))) {
-                        System.out.println("Intersect with " + is.get(k));
+                    if (shp.get(0).cross(is.get(k))) {
+                        System.out.print("Intersect");
                     } else {
-                        System.out.println("Don't intersect with " + is.get(k));
+                        System.out.print("Don't intersect");
                     }
                 }
                 List<IFigure> ifig = new LinkedList<IFigure>();
@@ -280,7 +280,7 @@ public class Main {
                 fig_square_sum += ifig.get(j).square();
                 vol_sum += ifig.get(j).volume();
             }
-            avg_square = fig_square_sum/figure_num;
+            avg_vol = vol_sum/figure_num;
             System.out.println("Sum of all volume: " + vol_sum);
             System.out.println("Sum of all squares: " + fig_square_sum);
             System.out.println("Average volume: " + avg_vol);

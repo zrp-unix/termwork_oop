@@ -7,6 +7,7 @@ class Pyramid implements IFigure{
         if(p.length <= 2) throw new Exception("the number of points less than 3");
         this.p0 = p0;
         this.p = p;
+        this.n = p.length;
     }
 
     Pyramid(Point3D[] p) throws Exception {
@@ -68,16 +69,16 @@ class Pyramid implements IFigure{
         }else {
             s /= cosa;
         }
-        for (int i = 0; i < p.length-1; i++) {
+        for (int i = 0; i < n; i++) {
             double c = 0;
             double x = 0, y = 0, z = 0;
             Point3D ab = new Point3D(new double[]{p0.getX(0) - p[i].getX(0), p0.getX(1) - p[i].getX(1), p0.getX(2) - p[i].getX(2)});
-            Point3D ac = new Point3D(new double[]{p0.getX(0) - p[i+1].getX(0), p0.getX(1) - p[i+1].getX(1), p0.getX(2) - p[i+1].getX(2)});
+            Point3D ac = new Point3D(new double[]{p0.getX(0) - p[(i+1)%n].getX(0), p0.getX(1) - p[(i+1)%n].getX(1), p0.getX(2) - p[(i+1)%n].getX(2)});
             x = (ab.getX(1) * ac.getX(2)) - (ab.getX(2) * ac.getX(1));
             y = (ab.getX(0) * ac.getX(2)) - (ab.getX(2) * ac.getX(0));
             z = (ab.getX(0) * ac.getX(1)) - (ab.getX(1) * ac.getX(0));
             c = Math.sqrt(x*x + y*y + z*z);
-            s += 0.5*c;
+            s += Math.abs(0.5*c);
         }
         return s;
     }

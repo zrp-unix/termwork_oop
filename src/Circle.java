@@ -45,8 +45,21 @@ class Circle implements IShape{
     }
 
     public boolean cross(IShape s) {
-        double len = length();
-        return false;
+        Circle ps = (Circle) s;
+        double len = Math.sqrt((p.getX(0) - ps.getP().getX(0)) * (p.getX(0) - ps.getP().getX(0)) + (p.getX(1) - ps.getP().getX(1)) * (p.getX(1) - ps.getP().getX(1)));
+        if(len == 0)
+        {
+            if(r == ps.r)
+                return true;
+            else
+                return false;
+        }
+        else
+        {
+            if(r + ps.r < len)
+                return false;
+            else return true;
+        }
     }
 
     public String toString() {

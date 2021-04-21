@@ -48,7 +48,35 @@ class Segment extends OpenFigure {
     }
 
     public boolean cross(IShape s) {
-        return false;
+        Segment ps = (Segment) s;
+        double A1, B1, C1, A2, B2, C2;
+        if ((start.getX(0) == ps.getStart().getX(0) && finish.getX(0) == getFinish().getX(0)) && (start.getX(1) == ps.getStart().getX(1) && finish.getX(1) == getFinish().getX(1)))
+            return true;
+        A1 = start.getX(1) - finish.getX(1);
+        B1 = -start.getX(0) + finish.getX(0);
+        C1 = -finish.getX(0) * A1 + finish.getX(1) * (-B1);
+
+        A2 = ps.getStart().getX(1) - ps.getFinish().getX(1);
+        B2 = -ps.getStart().getX(0) + ps.getFinish().getX(0);
+        C2 = -ps.getFinish().getX(0) * A2 + ps.getFinish().getX(1) * (-B2);
+        double x, y;
+        if (A1 == 0) {
+            y = -C1 / B1;
+            x = (-C2 - B2 * y) / A2;
+        } else
+        if (B1 == 0) {
+            x = -C1 / A1;
+            y = (-C2 - A2 * x) / B2;
+        } else {
+            y = (A2 * C1 / A1 - C2) / (-A2 * B1 / A1 + B2);
+            x = (-C1 - B1 * y) / A1;
+        }
+        boolean y1, y2;
+        y1 = ((start.getX(0) <= x && x <= finish.getX(0)) || (start.getX(0) >= x && x >= finish.getX(0))) && ((ps.getStart().getX(0) <= x && x <= ps.getFinish().getX(0)) || (ps.getStart().getX(0) >= x && x >= ps.getFinish().getX(0)));
+        y2 = ((start.getX(1) <= y && y <= finish.getX(1)) || (start.getX(1) >= y && y >= finish.getX(1))) && ((ps.getStart().getX(1) <= y && y <= ps.getFinish().getX(1)) || (ps.getStart().getX(1) >= y && y >= ps.getFinish().getX(1)));
+        if (y1 && y2 == true)
+            return true;
+        else return false;
     }
 
     public String toString() {

@@ -8,12 +8,14 @@ class Prism implements IFigure{
         if(p1.length != p2.length)throw new Exception("sides have different number of points");
         this.p1 = p1;
         this.p2 = p2;
+        this.n = p1.length;
     }
 
     Prism(Point3D[] p) throws Exception {
         if(p.length % 2 != 0) throw new Exception("number of points must be even");
         System.arraycopy(p, 0, p1, 0, p.length/2);
         System.arraycopy(p, p.length/2+1, p2, 0, p.length/2);
+        n = p.length/2;
     }
 
     int getN() {
@@ -64,24 +66,23 @@ class Prism implements IFigure{
         for (int i = 0; i < p1.length-1; i++) {
             s -= p1[i].getX(2) * p1[i+1].getX(0);
         }
-        s*= 0.5;
         double h = Math.abs(x1*p2[1].getX(0) + y1*p2[1].getX(1) + z1*p2[1].getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
         if(cnt == p1.length) {
             ;
         }else {
             s /= cosa;
         }
-        s*=2;
-        for (int i = 0; i < p1.length-1; i++) {
+        s = Math.abs(s);
+        for (int i = 0; i < n; i++) {
             double c = 0;
             double x = 0, y = 0, z = 0;
             Point3D ab = new Point3D(new double[]{p2[i].getX(0) - p1[i].getX(0), p2[i].getX(1) - p1[i].getX(1), p2[i].getX(2) - p1[i].getX(2)});
-            Point3D ac = new Point3D(new double[]{p1[i+1].getX(0) - p1[i].getX(0), p1[i+1].getX(1) - p1[i].getX(1), p1[i+1].getX(2) - p1[i].getX(2)});
+            Point3D ac = new Point3D(new double[]{p1[(i+1)%n].getX(0) - p1[i].getX(0), p1[(i+1)%n].getX(1) - p1[i].getX(1), p1[(i+1)%n].getX(2) - p1[i].getX(2)});
             x = (ab.getX(1) * ac.getX(2)) - (ab.getX(2) * ac.getX(1));
             y = (ab.getX(0) * ac.getX(2)) - (ab.getX(2) * ac.getX(0));
             z = (ab.getX(0) * ac.getX(1)) - (ab.getX(1) * ac.getX(0));
             c = Math.sqrt(x*x + y*y + z*z);
-            s += c;
+            s += Math.abs(c);
         }
         return s;
     }
@@ -94,9 +95,6 @@ class Prism implements IFigure{
         for (int i = 0; i < p1.length; i++) {
             if(p1[i].getX(1)== 0)
                 cnt++;
-        }
-        if(cnt == p1.length) {
-            x2 = 1; y2 = 0; z2 = 0;
         }
         x1 = ((p1[0].getX(1) - p1[1].getX(1)) * (p1[2].getX(2) - p1[1].getX(2))) - ((p1[0].getX(2) - p1[1].getX(2)) * (p1[2].getX(1) - p1[1].getX(1)));
         y1 = ((p1[0].getX(0) - p1[1].getX(0)) * (p1[2].getX(2) - p1[1].getX(2))) - ((p1[0].getX(2) - p1[1].getX(2)) * (p1[2].getX(0) - p1[1].getX(0)));
@@ -111,10 +109,14 @@ class Prism implements IFigure{
         for (int i = 0; i < p1.length-1; i++) {
             s -= p1[i].getX(2) * p1[i+1].getX(0);
         }
-        s*= 0.5;
+        s*=0.5;
         double h = Math.abs(x1*p2[1].getX(0) + y1*p2[1].getX(1) + z1*p2[1].getX(2) + d)/Math.sqrt(x1*x1 + y1*y1 + z1*z1);
-        s *= cosa;
-        vol = Math.abs(h*s);
+        if(cnt == p1.length) {
+            ;
+        }else {
+            s /= cosa;
+        }
+        vol = Math.abs(s*h);
         return vol;
     }
 
