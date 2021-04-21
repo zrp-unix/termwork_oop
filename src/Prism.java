@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Prism implements IFigure{
     private int n;
     private Point3D[] p1;
@@ -13,8 +15,15 @@ class Prism implements IFigure{
 
     Prism(Point3D[] p) throws Exception {
         if(p.length % 2 != 0) throw new Exception("number of points must be even");
-        System.arraycopy(p, 0, p1, 0, p.length/2);
-        System.arraycopy(p, p.length/2+1, p2, 0, p.length/2);
+        p1 = new Point3D[p.length/2];
+        p2 = new Point3D[p.length/2];
+
+        for(int i = 0; i < p.length/2; i++) {
+            p1[i] = p[i];
+        }
+        for(int i = p.length/2; i < p.length; i++) {
+            p2[i-p.length/2] = p[i];
+        }
         n = p.length/2;
     }
 
@@ -24,8 +33,10 @@ class Prism implements IFigure{
 
     Point3D[] getP() {
         Point3D[] p = new Point3D[p1.length*2];
-        System.arraycopy(p1, 0, p, 0, p1.length);
-        System.arraycopy(p2, 0, p, p1.length+1, p2.length);
+        for (int i = 0; i < getN(); i++)
+            p[i] = p1[i];
+        for (int i = getN(); i < getN()*2; i++)
+            p[i] = p2[i-getN()];
         return p;
     }
 
@@ -36,8 +47,15 @@ class Prism implements IFigure{
     }
 
     Point3D getP(int i) throws Exception {
-        if (i > p1.length) throw new Exception("this point does not exist");
-        return p1[i];
+        if (i > p1.length * 2) throw new Exception("this point does not exist");
+        Point3D[] p = new Point3D[n*2];
+        for(int j = 0; j < n; j++) {
+            p[j] = p1[j];
+        }
+        for(int j = n; j < n*2; j++) {
+            p[j] = p1[j-n];
+        }
+        return p[i];
     }
 
     void setP(Point3D p, int i) throws Exception {
@@ -121,6 +139,6 @@ class Prism implements IFigure{
     }
 
     public String toString() {
-        return null;
+        return Arrays.toString(getP()) + " " + getN();
     }
 }

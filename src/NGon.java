@@ -51,8 +51,8 @@ class NGon implements IShape {
 
     public double length() throws Exception {
         double len = 0;
-        for(int i = 0; i < n-1; i++){
-            len += Point.sub(p[i], p[i+1]).abs();
+        for(int i = 0; i < n; i++){
+            len += Point.sub(p[i], p[(i+1)%n]).abs();
         }
         return len;
     }
@@ -160,6 +160,6 @@ class NGon implements IShape {
     }
 
     public String toString() {
-        return Arrays.toString(p);
+        return Arrays.toString(p) + " " + n;
     }
 }

@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 class Pyramid implements IFigure{
     private Point3D p0;
     private int n;
@@ -117,6 +119,6 @@ class Pyramid implements IFigure{
     }
 
     public String toString() {
-        return null;
+        return p0 + " " + Arrays.toString(p) + " " + n;
     }
 }
